@@ -1,0 +1,86 @@
+@charset "utf-8";
+@import "./header.scss";
+@import "./sidebar.scss";
+
+@mixin header_font_color($color){/*通过该函数设置字体颜色，后期方便统一管理；*/
+	color: $color;
+  [data-header-theme="white"] & {
+    color: $h_font-color-white-theme;
+  }
+  [data-header-theme="black"] & {
+    color: $h_font-color-black-theme;
+  }
+}
+
+@mixin header_font_color_sec ($color) {
+  color: $color;
+  [data-header-theme="white"] & {
+    color: $h_font-color-white-themesec;
+  }
+  [data-header-theme="black"] & {
+    color: $h_font-color-black-themesec;
+  }
+}
+
+@mixin header_bg_color($color) {
+  background-color: $color;
+  [data-header-theme="white"] & {
+    background-color: $h_bg-white-theme;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  }
+  [data-header-theme="black"] & {
+    background-color: $h_bg-black-theme;
+  }
+}
+
+// sidebar
+@mixin sidebar_bg_color($color) {
+  background-color: $color;
+  [data-sidebar-theme="white"] & {
+    background-color: $s_bg-white-theme; 
+    border-bottom: 1px solid #f7f7f7;
+  }
+  [data-sidebar-theme="black"] & {
+    background-color: $s_bg-black-theme
+  }
+}
+
+@mixin sidebar_font_color($color) {
+  color: $color;
+  [data-sidebar-theme="white"] & {
+    color: $s_font-color-white-theme; 
+  }
+  [data-sidebar-theme="black"] & {
+    color: $s_font-color-black-theme
+  }
+}
+
+@mixin sidebar_font_color_sec($color) {
+  color: $color;
+  [data-sidebar-theme="white"] & {
+    color: $s_font-color-white-themesec; 
+  }
+  [data-sidebar-theme="black"] & {
+    color: $s_font-color-black-themesec
+  }
+}
+
+@mixin sidebar_font_act_color($color) {
+  color: $color;
+  [data-sidebar-theme="white"] & {
+    color: $s_act-font-color-white-theme; 
+  }
+  [data-sidebar-theme="black"] & {
+    color: $s_act-font-color-black-theme;
+  }
+}
+
+@mixin sidebar_font_act_bg_color($color) {
+  background-color: $color !important;
+  [data-sidebar-theme="white"] & {
+    background-color: $s_act-bg-white-theme !important; 
+  }
+  [data-sidebar-theme="black"] & {
+    background-color: $s_act-bg-black-theme !important;
+  }
+}

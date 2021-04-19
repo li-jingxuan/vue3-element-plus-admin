@@ -1,0 +1,51 @@
+{
+    "name": "vue-manage-system",
+    "version": "5.0.0",
+    "private": true,
+    "scripts": {
+        "serve": "cross-env RUN_NODE_ENV=dev vue-cli-service serve",
+        "test": "cross-env RUN_NODE_ENV=test vue-cli-service serve",
+        "prod": "cross-env RUN_NODE_ENV=prod vue-cli-service serve",
+        "build": "cross-env RUN_NODE_ENV=prod vue-cli-service build"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "core-js": "~3.9.1",
+        "cross-env": "^7.0.3",
+        "element-plus": "~1.0.2-beta.33",
+        "lodash": "^4.17.21",
+        "sass-resources-loader": "^2.2.1",
+        "store": "^2.0.12",
+        "vue": "~3.0.7",
+        "vue-cropperjs": "^5.0.0",
+        "vue-i18n": "^9.0.0",
+        "vue-loader-v16": "^16.0.0-beta.5.4",
+        "vue-router": "~4.0.4",
+        "vue-schart": "^2.0.0",
+        "vuex": "~4.0.0"
+    },
+    "devDependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@vue/cli-plugin-babel": "~4.5.11",
+        "@vue/cli-plugin-router": "~4.5.11",
+        "@vue/cli-plugin-vuex": "~4.5.11",
+        "@vue/cli-service": "~4.5.11",
+        "@vue/compiler-sfc": "~3.0.7",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.24.0",
+        "eslint-config-standard": "^16.0.2",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^5.1.0",
+        "eslint-plugin-vue": "^7.9.0",
+        "sass": "~1.32.8",
+        "sass-loader": "~8.0.2",
+        "vue-cli-plugin-element-plus": "0.0.13",
+        "webpack": "4.44.2"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
+}
