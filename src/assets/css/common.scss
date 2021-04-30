@@ -1,1 +1,23 @@
+// 全局通用 scss 变量，不需要引入改文件可直接在 <style> 中使用
+// 已通过 sass-resources-loader 插件进行全局解析引入
+
 $headerHeight: 64px;
+
+$mainColor: #28312B; // 主要字体颜色
+$tableHeaderColor: #909399; // 表格 th 字体颜色
+$actMainColor: #409eff;  // 高亮主要字体颜色
+$tipsColor: #AFB5B1; // 文字提示信息字体颜色
+// 成功、警告、错误字体颜色
+$errorColor: #f56c6c;
+$warningColor: #E6A23C;
+$successColor: #67C23A; 
+
+// 通用带圆角阴影盒子
+@mixin boxShadw ($radius: 4px, $color: rgba(0,0,0,.08)) {
+  border-radius: $radius;
+  box-shadow: 0px 2px 10px 0px $color;
+}
+
+li {
+  list-style: none;
+}

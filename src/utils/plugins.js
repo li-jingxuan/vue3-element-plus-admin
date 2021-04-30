@@ -9,8 +9,13 @@ import localeZH from 'element-plus/lib/locale/lang/zh-cn'
 import localeEN from 'element-plus/lib/locale/lang/en'
 
 // store.js Plugins
-import browserStore from './browserStore'
+import browserStore from './browser-store'
 import store from '@/store'
+
+// EventEmitter Plugins
+import { Emitter } from './event-emitter'
+
+import { Message } from './messager'
 
 export const i18n = createI18n({
   locale: store.state.localLanguages,
@@ -31,4 +36,6 @@ export default (app) => {
   app.use(i18n)
   app.use(ElementPlus, { i18n: i18n.global.t })
   app.use(browserStore)
+  app.use(Emitter)
+  app.use(Message)
 }

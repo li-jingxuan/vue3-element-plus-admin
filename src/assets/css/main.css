@@ -30,7 +30,7 @@ div:focus{
     position: absolute;
     left: 250px;
     right: 0;
-    top: 74px;
+    top: 79px;
     bottom: 0;
     padding-bottom: 30px;
     -webkit-transition: left .3s ease-in-out;
@@ -40,7 +40,7 @@ div:focus{
 .content {
     width: auto;
     height: 100%;
-    padding: 10px;
+    padding: 15px;
     overflow-y: auto;
     box-sizing: border-box;
 }

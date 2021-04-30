@@ -14,7 +14,7 @@
     >
       <template v-for="(item, i1) in meuns">
         <template v-if="item.children">
-          <el-submenu :index="item.meunKey" :key="i1">
+          <el-submenu :index="item.menuKey" :key="i1">
             <template #title>
               <i :class="item.icon"></i>
               <span>{{ item.title }}</span>
@@ -75,9 +75,46 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
-@import "~@/assets/css/common.scss";
+<style lang="scss">
+.el-menu--inline{
+  @include sidebar_bg_color($s_bg-black-theme);
+}
+.el-menu-item{
+  @include sidebar_font_color_sec($s_font-color-black-themesec);
+  i{
+    @include sidebar_font_color_sec($s_font-color-black-themesec);
+  }
+}
+.el-submenu__title {
+  @include sidebar_font_color_sec($s_font-color-black-themesec);
+  i {
+    @include sidebar_font_color_sec($s_font-color-black-themesec);
+  }
+}
 
+// 激活
+.el-menu-item.is-active{
+  @include sidebar_font_act_color($s_font-color-black-theme);
+  @include sidebar_font_act_bg_color($s_act-bg-white-theme);
+}
+// hover
+.el-menu-item:focus, .el-menu-item:hover{
+  @include sidebar_font_act_color($s_act-font-color-white-theme);
+  @include sidebar_bg_color($s_bg-black-theme);
+  i{
+    @include sidebar_font_act_color($s_act-font-color-white-theme);
+  }
+}
+.el-submenu__title:hover{
+  @include sidebar_font_act_color($s_act-font-color-white-theme);
+  @include sidebar_bg_color($s_bg-black-theme);
+  i{
+    @include sidebar_font_act_color($s_act-font-color-white-theme);
+  }
+}
+</style>
+
+<style lang="scss" scoped>
 .sidebar {
   height: 100vh;
   position: relative;
@@ -99,25 +136,8 @@ export default defineComponent({
   width: 0;
 }
 
-.sidebar > .el-menu{
+.sidebar > .sidebar-el-menu{
   @include sidebar_bg_color($s_bg-black-theme);
-}
-.sidebar > .el-menu > .el-menu-item{
-  @include sidebar_font_color_sec($s_font-color-black-themesec)
-}
-
-.sidebar > .el-menu .el-menu-item:hover{
-  @include sidebar_font_act_color($s_act-font-color-white-theme);
-  @include sidebar_font_act_bg_color($s_act-bg-white-theme);
-}
-
-.sidebar > .el-menu > .is-active{
-  @include sidebar_font_act_color($s_font-color-black-theme);
-  @include sidebar_font_act_bg_color($s_act-bg-white-theme);
-}
-
-.sidebar > .el-menu > .el-menu-item i{
-  color: inherit !important;
 }
 
 .logo-box{
@@ -126,10 +146,11 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   @include sidebar_bg_color($s_bg-black-theme);
+  @include logobox-borderbottom();
   .open-logo{
     height: 45px;
     width: 100%;
-    background-image: url("https://seller-test.perfee.com/_nuxt/img/nav-logo.cc79ac7.png");
+    background-image: url("../../assets/img/login.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -140,7 +161,7 @@ export default defineComponent({
     background-size: contain;
     width: 100%;
     height: 45px;
-    background-image: url("https://seller-test.perfee.com/_nuxt/img/mask_img.ea628d1.png");
+    background-image: url("../../assets/img/small-logo.png");
   }
 }
 </style>

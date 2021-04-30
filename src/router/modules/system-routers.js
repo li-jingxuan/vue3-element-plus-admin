@@ -10,6 +10,7 @@ export default [
   {
     title: 'Test',
     icon: 'el-icon-lx-home',
+    menuKey: 'Test',
     children: [
       {
         path: '/test',

@@ -38,10 +38,19 @@
   background-color: $color;
   [data-sidebar-theme="white"] & {
     background-color: $s_bg-white-theme; 
-    border-bottom: 1px solid #f7f7f7;
   }
   [data-sidebar-theme="black"] & {
     background-color: $s_bg-black-theme
+  }
+}
+
+@mixin logobox-borderbottom() {
+  border-bottom: none;
+  [data-sidebar-theme="white"] & {
+    border-bottom: 1px solid #f7f7f7;
+  }
+  [data-sidebar-theme="black"] & {
+    border-bottom: none;
   }
 }
 

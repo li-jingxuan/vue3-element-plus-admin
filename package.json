@@ -3,10 +3,10 @@
     "version": "5.0.0",
     "private": true,
     "scripts": {
-        "serve": "cross-env RUN_NODE_ENV=dev vue-cli-service serve",
-        "test": "cross-env RUN_NODE_ENV=test vue-cli-service serve",
-        "prod": "cross-env RUN_NODE_ENV=prod vue-cli-service serve",
-        "build": "cross-env RUN_NODE_ENV=prod vue-cli-service build"
+        "serve": "cross-env VUE_APP_ENV=dev vue-cli-service serve",
+        "test": "cross-env VUE_APP_ENV=test vue-cli-service serve",
+        "prod": "cross-env VUE_APP_ENV=prod vue-cli-service serve",
+        "build": "cross-env VUE_APP_ENV=prod vue-cli-service build"
     },
     "dependencies": {
         "axios": "^0.21.1",

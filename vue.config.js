@@ -44,7 +44,10 @@ module.exports = {
           // resources: './path/to/resources.scss',
 
           // Or array of paths
-          resources: [path.join(__dirname, 'src', 'assets', 'css', 'theme', 'mixin.scss')]
+          resources: [
+            path.join(__dirname, 'src', 'assets', 'css', 'theme', 'mixin.scss'), // 主题scss
+            path.join(__dirname, 'src', 'assets', 'css', 'common.scss') // 全局通用 scss 变量
+          ]
         })
         .end()
     })
