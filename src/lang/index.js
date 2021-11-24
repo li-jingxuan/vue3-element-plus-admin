@@ -3,7 +3,7 @@ const langFiles = require.context('./', true, /\.js$/)
 const i18nObject = {}
 const settingLang = {
   _set: {
-    en: function (key, lang) {
+    en: function(key, lang) {
       const _k = 'en'
       const paths = key.replace(/.\/en\//g, '').replace(/\.js$/g, '').split('/')
 
@@ -13,7 +13,7 @@ const settingLang = {
 
       this._set(_k, paths, lang)
     },
-    'zh-cn': function (key, lang) {
+    'zh-cn': function(key, lang) {
       const _k = 'zh-cn'
       const paths = key.replace(/.\/zh-cn\//g, '').replace(/\.js$/g, '').split('/')
 
@@ -23,7 +23,7 @@ const settingLang = {
 
       this._set(_k, paths, lang)
     },
-    _getCurChildren (path, o) {
+    _getCurChildren(path, o) {
       path = path.split('-').map((_v, index) => index === 0 ? _v : _v.replace(/^\S/, s => s.toUpperCase())).join('')
       if (!o[path]) {
         o[path] = {}
@@ -31,7 +31,7 @@ const settingLang = {
 
       return o[path]
     },
-    _set (key, paths, value) {
+    _set(key, paths, value) {
       let t = i18nObject[key]
 
       for (let i = 0; i < paths.length; i++) {
@@ -43,7 +43,7 @@ const settingLang = {
       }
     }
   },
-  setting: function (type, key, lang) {
+  setting: function(type, key, lang) {
     this._set[type] && this._set[type](key, lang)
   }
 }

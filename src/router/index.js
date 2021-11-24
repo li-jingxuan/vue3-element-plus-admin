@@ -1,15 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '@/layout'
-// import defaultRouter from './modules/default'
 import systemRouters from './modules/system-routers'
+import platformSite from './modules/platform-site'
 import { isPermission } from '@/utils/permission'
+// import { i18n } from '@/utils/plugins.js'
 
 const routerConfig = [
-  ...systemRouters
+  ...systemRouters,
+  ...platformSite
 ]
 
 const routers = []
-function routerFormat (tree) {
+function routerFormat(tree) {
   for (let i = 0; i < tree.length; i++) {
     const item = tree[i]
 
@@ -22,6 +24,7 @@ function routerFormat (tree) {
 }
 
 routerFormat(routerConfig)
+
 const routes = [
   // 根路由
   {
@@ -33,7 +36,9 @@ const routes = [
     path: '/login',
     name: 'Login',
     meta: {
-      title: '登录'
+      title: '登录',
+      permission: 'all',
+      tagHidden: true
     },
     component: () => import('@/views/Login.vue')
   },
@@ -46,16 +51,16 @@ const routes = [
       ...routers,
       // 权限不足
       {
-        path: '/403',
+        path: '/',
         component: () => import('@/views/403.vue'),
-        meta: { title: '403' }
+        meta: { title: '403', permission: 'all' }
       },
       // 404 页面应该放在路由最后面
       {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: () => import('@/views/404.vue'),
-        meta: { title: '404' }
+        meta: { title: '404', permission: 'all' }
       }
     ]
   }
@@ -68,9 +73,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // 设置title信息
-  document.title = `${to.meta.title} | perfee`
+  document.title = `${to.meta.title}-Uomnify`
   // 权限控制
-  isPermission(to) ? next() : next('/403')
+  isPermission(to, from, next)
 })
 
 export default { router, sidebarConfig: routerConfig }

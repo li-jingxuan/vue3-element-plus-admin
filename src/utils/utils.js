@@ -6,17 +6,20 @@
  * @param {String} val
  * @returns 类型
  */
- export function getTypeof(val) {
+export function getTypeof(val) {
   return Object.prototype.toString.call(val).slice(8, -1)
 }
 
 /**
  * 自定义格式化日期
- * @param {Date String} date Date() 对象 或 日期字符串
- * @param {String} format 支持 YYYY-MM-DD HH:mm:ss / YY-MM-DD / HH:mm:ss / YYYYMMDD 等常用日期格式
+ * @param {Date String} date[必须] Date() 对象 或 日期字符串
+ * @param {String} format[可选] （默认值：YYYY-MM-DD HH:mm:ss）支持 YYYY-MM-DD HH:mm:ss / YY-MM-DD / HH:mm:ss / YYYYMMDD 等常用日期格式
  * @returns
  */
-export function formatDate(date, format) {
+export function formatDate(date, format = 'YYYY-MM-DD HH:mm:ss') {
+  if (!date) {
+    return date
+  }
   let dt = date
   if (getTypeof(date) === 'String') {
     dt = new Date(date)
@@ -81,4 +84,53 @@ export function computeDate(minDate, maxDate) {
     second: diffSecond,
     ms: diffMs
   }
+}
+
+/**
+ * 遍历对象
+ * @param {Object} obj[必须] 需要遍历的对象
+ * @param {*} callback[必须] 回调函数，参数 1：key值 参数 2：key对于的值
+ */
+export function forEachValue(obj, callback) {
+  Object.keys(obj).forEach(k => callback(k, obj[k]))
+}
+
+export function validateAsync(form, options) {
+  return new Promise((resolve, reject) => {
+    form.validate(valid => valid ? resolve(options) : reject(valid))
+  })
+}
+
+export function validateFieldAsync(form, key, options) {
+  return new Promise((resolve, reject) => {
+    form.validateField(key, valid => valid ? reject(valid) : resolve(options))
+  })
+}
+
+/**
+ * 字符串打马赛克，如：9991234000返回999****000
+ * @param {String} str 字符串
+ * @param {String} mosStr 马赛克符号
+ * @returns {String}
+ */
+export function addMosaic(str, mosStr = '*') {
+  if (!str) {
+    return
+  }
+  const len = str.length
+  const baseMos = mosStr.repeat(4)
+  if (len < 4) {
+    return baseMos
+  }
+  const half = Math.floor(len / 2)
+  const halfL = half - 2
+  const halfR = half + 2
+  return `${str.slice(0, halfL)}${baseMos}${str.slice(halfR, len)}`
+}
+
+export function guid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = Math.random() * 16 | 0; const v = c === 'x' ? r : (r & 0x3 | 0x8)
+    return v.toString(16)
+  })
 }

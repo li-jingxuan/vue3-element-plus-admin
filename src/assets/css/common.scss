@@ -2,8 +2,9 @@
 // 已通过 sass-resources-loader 插件进行全局解析引入
 
 $headerHeight: 64px;
+$menuItemHeight:50px;
 
-$mainColor: #28312B; // 主要字体颜色
+$mainColor: #303133; // 主要字体颜色
 $tableHeaderColor: #909399; // 表格 th 字体颜色
 $actMainColor: #409eff;  // 高亮主要字体颜色
 $tipsColor: #AFB5B1; // 文字提示信息字体颜色
@@ -20,4 +21,41 @@ $successColor: #67C23A;
 
 li {
   list-style: none;
+}
+
+// 通用 红、绿、灰、三种状态盒子
+.sx-stateStyle_Red {
+  text-align: center;
+  display: inline-block;
+  line-height: 30px;
+  width: 60px;
+  height: 30px;
+  color: $errorColor;
+  background-color: rgba($color: $errorColor, $alpha: 0.15);
+}
+.sx-stateStyle_Green {
+  text-align: center;
+  display: inline-block;
+  line-height: 30px;
+  width: 60px;
+  height: 30px;
+  color: $successColor;
+  background-color: rgba($color: $successColor, $alpha: 0.15);
+}
+.sx-stateStyle_Grey {
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  width: 60px;
+  height: 30px;
+  color: $tableHeaderColor;
+  background-color: rgba($color: $tableHeaderColor, $alpha: 0.15);
+}
+
+// 公用搜索区域
+.sx-query{
+  background-color: #f5f7fa;
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: 14px;
 }

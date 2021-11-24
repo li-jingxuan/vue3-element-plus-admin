@@ -12,6 +12,9 @@ export const fullLoading = (text, spinner, options) => {
 }
 
 export const messageTip = (message, type, options) => {
+  if (!message) {
+    return
+  }
   const opt = {
     // 默认配置
     // 显示关闭按钮

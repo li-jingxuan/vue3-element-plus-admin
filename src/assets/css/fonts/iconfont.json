@@ -1,0 +1,23 @@
+{
+  "id": "2499726",
+  "name": "bee",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "express system",
+  "glyphs": [
+    {
+      "icon_id": "1368669",
+      "name": "eye_close",
+      "font_class": "eye_close",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
+      "icon_id": "1368670",
+      "name": "eye_open",
+      "font_class": "eye_open",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    }
+  ]
+}

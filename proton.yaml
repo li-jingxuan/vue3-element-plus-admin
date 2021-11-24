@@ -1,0 +1,102 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    quark-{{{env}}}-app: proton
+  name: proton
+  namespace: quark-{{{env}}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      quark-{{{env}}}-app: proton
+  serviceName: proton
+  template:
+    metadata:
+      labels:
+        quark-{{{env}}}-app: proton
+      name: proton
+    spec:
+      imagePullSecrets:
+        - name: default-secret
+      volumes:
+      - name: nginx-default-conf-proton
+        configMap:
+          name: nginx-default-conf-proton
+      - name: host-time
+        hostPath:
+          path: /etc/localtime
+      nodeSelector:
+        quark-env: {{{env}}}
+      containers:
+      - env:
+        - name: _ZK_HOSTS
+          value: zookeeper
+        - name: _APP_NAME
+          value: quark
+        - name: _APP_ENV
+          value: {{{env}}}
+        - name: _DEBUG
+          value: "{{{debug}}}"
+        image: {{{registry}}}/{{{organization}}}/{{{env}}}-proton:{{{version}}}
+        imagePullPolicy: Always
+        name: proton
+        volumeMounts:
+        - name: nginx-default-conf-proton
+          mountPath: /etc/nginx/conf.d/
+        - name: host-time
+          mountPath: /etc/localtime
+        resources: {}
+        securityContext:
+          privileged: false
+          procMount: Default
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    quark-{{{env}}}-app: proton
+  name: proton
+  namespace: quark-{{{env}}}
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    quark-{{{env}}}-app: proton
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-default-conf-proton
+  namespace: quark-{{{env}}}
+data:
+  default.conf: |
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            root   /usr/share/nginx/html;
+            index  index.html index.htm;
+            try_files $uri $uri/ /index.html;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   /usr/share/nginx/html;
+        }
+    }

@@ -14,7 +14,7 @@
 <script>
 export default {
   methods: {
-    goBack () {
+    goBack() {
       this.$router.go(-1)
     }
   }

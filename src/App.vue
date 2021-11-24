@@ -5,9 +5,8 @@
 <script>
 import { defineComponent, onMounted, watch, ref } from 'vue'
 import { useStore } from 'vuex'
-
 export default defineComponent({
-  setup () {
+  setup() {
     const store = useStore()
     const htheme = ref(store.state.headerTheme)
     const stheme = ref(store.state.sidebarTheme)
@@ -15,16 +14,12 @@ export default defineComponent({
     watch(
       () => store.state.headerTheme,
       () => {
-        const appEl = document.getElementById('app')
-        console.log('watch', htheme.value)
-        appEl && appEl.setAttribute('data-header-theme', store.state.headerTheme)
+        document.body.setAttribute('data-header-theme', store.state.headerTheme)
       })
     watch(
       () => store.state.sidebarTheme,
       () => {
-        const appEl = document.getElementById('app')
-
-        appEl && appEl.setAttribute('data-sidebar-theme', store.state.sidebarTheme)
+        document.body.setAttribute('data-sidebar-theme', store.state.sidebarTheme)
       }
     )
 
@@ -34,8 +29,8 @@ export default defineComponent({
         return
       }
 
-      appEl.setAttribute('data-header-theme', htheme.value)
-      appEl.setAttribute('data-sidebar-theme', stheme.value)
+      document.body.setAttribute('data-header-theme', htheme.value)
+      document.body.setAttribute('data-sidebar-theme', stheme.value)
     })
   }
 })

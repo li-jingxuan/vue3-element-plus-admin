@@ -5,7 +5,9 @@
  * @param {any} val
  * @returns Boolean
  */
-export const isNumber = (val) => /^[-+]?\d+\.?\d+$/.test(val)
+export const isNumber = (val) => {
+  return /^[+-]?\d+$/.test(val) || /^[-+]?\d+\.?\d+$/.test(val)
+}
 
 /**
  * 正整数

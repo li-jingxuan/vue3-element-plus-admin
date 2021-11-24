@@ -1,9 +1,137 @@
 // 定制化 element-plus 部分样式
 
-.el-table thead{
+.el-table thead {
   color: #909399;
 }
 
-.el-table{
+.el-table {
   color: #606266;
+}
+
+/* 侧边栏跟主题变动 */
+.el-menu--inline {
+  @include sidebar_bg_color($s_bg-black-theme);
+}
+.el-menu-item {
+  height: $menuItemHeight;
+  @include sidebar_font_color_sec($s_font-color-black-themesec);
+  @include sidebar_bg_color($s_bg-black-theme);
+  i {
+    @include sidebar_font_color_sec($s_font-color-black-themesec);
+  }
+}
+.el-submenu__title {
+  padding-left: 12px !important;
+  height: $menuItemHeight;
+  @include sidebar_font_color_sec($s_font-color-black-themesec);
+  @include sidebar_bg_color($s_bg-black-theme);
+  i {
+    @include sidebar_font_color_sec($s_font-color-black-themesec);
+  }
+}
+
+// 激活
+.el-menu-item.is-active {
+  @include sidebar_font_act_color($s_font-color-black-theme);
+  @include sidebar_font_act_bg_color($s_act-bg-white-theme);
+  .dot {
+    @include sidebar_dot_color($s_font-color-black-theme);
+  }
+}
+// hover
+.el-menu-item:focus,
+.el-menu-item:hover {
+  @include sidebar_font_act_color($s_act-font-color-white-theme);
+  i {
+    @include sidebar_font_act_color($s_act-font-color-white-theme);
+  }
+  .dot {
+    @include sidebar_dot_color($s_font-color-black-theme);
+  }
+}
+.el-submenu__title:hover {
+  padding-left: 12px !important;
+  @include sidebar_font_act_color($s_act-font-color-white-theme);
+  i {
+    @include sidebar_font_act_color($s_act-font-color-white-theme);
+  }
+}
+
+// 消息气泡的样式调整
+$colorMsgPrimary: #2e8bf0;
+$colorMsgSuccess: #19bf6c;
+$colorMsgWarning: #f90;
+$colorMsgError: #ed3f13;
+
+.el-message {
+  padding: 12px 15px;
+  background-color: #f0faff;
+  border-color: #d4eeff;
+
+  .el-message__closeBtn {
+    right: 10px;
+  }
+
+  .el-icon-info {
+    color: $colorMsgPrimary;
+  }
+
+  .el-icon-success {
+    color: $colorMsgSuccess;
+  }
+
+  .el-icon-warning {
+    color: $colorMsgWarning;
+  }
+
+  .el-icon-error {
+    color: $colorMsgError;
+  }
+}
+
+.el-message--info {
+  .el-message__content {
+    color: $colorMsgPrimary;
+  }
+}
+
+.el-message--success {
+  background-color: #edfff3;
+  border-color: #bbf2cf;
+
+  .el-message__content {
+    color: $colorMsgSuccess;
+  }
+}
+
+.el-message--warning {
+  background-color: #fff9e6;
+  border-color: #ffe7a3;
+
+  .el-message__content {
+    color: $colorMsgWarning;
+  }
+}
+
+.el-message--error {
+  background-color: #ffefe6;
+  border-color: #ffcfb8;
+
+  .el-message__content {
+    color: $colorMsgError;
+  }
+}
+
+.el-message .el-message__closeBtn {
+  right: 10px;
+}
+
+// <divider />组件上下间距减小
+.el-divider--horizontal {
+  margin: 20px 0 !important;
+}
+
+// 对话框上下左右padding缩小并保持一致
+.el-dialog__body{
+  padding: 0px 20px 20px 20px;
 }

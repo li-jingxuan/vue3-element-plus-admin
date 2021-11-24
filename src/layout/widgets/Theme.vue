@@ -23,7 +23,7 @@
 import { useStore } from 'vuex'
 
 export default {
-  setup () {
+  setup() {
     const store = useStore()
     const themes = [
       {

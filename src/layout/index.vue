@@ -6,13 +6,15 @@
       <div class="right-content-box">
         <VHeader />
         <div class="content-box" :class="{ 'content-collapse': collapse }">
-          <VTags />
+          <VTags @reload="handleReload" />
           <div class="content">
-            <router-view v-slot="{ Component }">
+            <router-view v-if="routerViewRefash" v-slot="{ Component, route }">
               <transition name="move" mode="out-in">
-                <keep-alive :include="tagsList">
-                  <component :is="Component" />
+                <!-- <keep-alive v-if="getIsKeepAlive(route)"> -->
+                <keep-alive :include="keepAliveList">
+                  <component :is="Component" :key="route.fullPath" />
                 </keep-alive>
+                <!-- <component v-else :is="Component" :key="route.fullPath" /> -->
               </transition>
             </router-view>
           </div>
@@ -24,15 +26,37 @@
 import VHeader from './widgets/Header.vue'
 import VSidebar from './widgets/Sidebar.vue'
 import VTags from './widgets/Tags.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: { VHeader, VSidebar, VTags },
   computed: {
-    tagsList () {
-      return this.$store.state.tagsList.map(item => item.name)
-    },
-    collapse () {
+    ...mapState(['tagsList']),
+    collapse() {
       return this.$store.state.collapse
+    },
+    keepAliveList() {
+      const _l = this.tagsList.filter(c => c.componentName).map(c => c.componentName)
+
+      return _l
+    }
+  },
+  data() {
+    return {
+      routerViewRefash: true
+    }
+  },
+  methods: {
+    // getIsKeepAlive(route) {
+    //   const isKeep = route.meta.keepAlive !== false && this.tagsList.some(c => c.path === route.path)
+    //   console.log(isKeep, route)
+    //   return isKeep
+    // },
+    handleReload() {
+      this.routerViewRefash = false
+      this.$nextTick(() => {
+        this.routerViewRefash = true
+      })
     }
   }
 }

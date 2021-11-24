@@ -1,0 +1,4 @@
+job1:
+  script: "sh docker-auto-cce.sh dev 1"
+  only:
+  - dev
