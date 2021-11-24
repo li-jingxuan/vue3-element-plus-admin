@@ -1,13 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Layout from '@/layout'
 import systemRouters from './modules/system-routers'
-import platformSite from './modules/platform-site'
 import { isPermission } from '@/utils/permission'
-// import { i18n } from '@/utils/plugins.js'
 
 const routerConfig = [
-  ...systemRouters,
-  ...platformSite
+  ...systemRouters
 ]
 
 const routers = []
