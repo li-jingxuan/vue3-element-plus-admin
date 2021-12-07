@@ -27,37 +27,37 @@
 
         <!-- 【此注释有实际意义，国际化切换，不可删除】 -->
         <!-- 目前仅支持中文 -->
-        <!-- <div class="header-item">
-                <el-dropdown trigger="click" @command="handleLanguagesChange">
-                  <span class="el-dropdown-link">
-                    <span class="font-color">
-                      {{ localLanguages }}
-                      <i class="el-icon-caret-bottom"></i>
-                    </span>
-                  </span>
-                  <template #dropdown>
-                    <el-dropdown-menu>
-                      <el-dropdown-item
-                          v-for="item in languages"
-                          :key="item.value"
-                          divided
-                          :command="item.value"
-                      >
-                        {{ item.label }}
-                      </el-dropdown-item>
-                    </el-dropdown-menu>
-                  </template>
-                </el-dropdown>
-              </div> -->
+        <div class="header-item">
+          <el-dropdown trigger="click" @command="handleLanguagesChange">
+            <span class="el-dropdown-link">
+              <span class="font-color">
+                {{ localLanguages }}
+                <i class="el-icon-caret-bottom"></i>
+              </span>
+            </span>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item
+                  v-for="item in languages"
+                  :key="item.value"
+                  divided
+                  :command="item.value"
+                >
+                  {{ item.label }}
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
 
         <!-- 用户头像 -->
-        <!-- <div class="user-avator">
+        <div class="user-avator">
           <img
             :src="userInfo?.avatar || require('@/assets/img/small-logo.png')"
           />
-        </div> -->
+        </div>
         <!-- 用户名下拉菜单 -->
-        <!-- <div class="user-name">
+        <div class="user-name">
           <el-dropdown trigger="click" @command="handleCommand">
             <span class="el-dropdown-link font-color">
               {{ userInfo?.username || '未知' }}
@@ -71,8 +71,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-        </div> -->
-        <span class="loginout" @click="loginout">退出登录</span>
+        </div>
       </div>
     </div>
   </div>
@@ -90,7 +89,7 @@ export default defineComponent({
   },
   setup(props, ctx) {
     const store = useStore()
-    const user = store.state.userInfo
+    const userInfo = store.state.userInfo
     const router = useRouter()
     const self = getCurrentInstance()
     const languages = [
@@ -99,7 +98,7 @@ export default defineComponent({
     ]
 
     const theme = ref('theme1')
-    const userInfo = computed(() => (user ? user.userInfo : null))
+    // const userInfo = computed(() => (user ? user.userInfo : null))
     const collapse = computed(() => store.state.collapse)
     const localLanguages = computed(() => {
       const val = store.state.localLanguages
@@ -110,21 +109,14 @@ export default defineComponent({
       return languages.filter((item) => item.value === val)[0].label
     })
 
-    // // 用户名下拉菜单选择事件
-    // const handleCommand = (command) => {
-    //   if (command === 'loginout') {
-    //     store.commit('logout')
-    //     // 退出登录清除 tags
-    //     store.commit('clearTags')
-    //     router.replace('/login')
-    //   }
-    // }
-
-    // 退出登录
-    const loginout = () => {
-      store.commit('logout')
-      store.commit('clearTags')
-      router.replace('/login')
+    // 用户名下拉菜单选择事件
+    const handleCommand = (command) => {
+      if (command === 'loginout') {
+        store.commit('logout')
+        // 退出登录清除 tags
+        store.commit('clearTags')
+        router.replace('/login')
+      }
     }
 
     // 侧边栏折叠
@@ -151,8 +143,7 @@ export default defineComponent({
       languages,
       userInfo,
       collapse,
-      // handleCommand,
-      loginout,
+      handleCommand,
       collapseChage,
       handleLanguagesChange,
       handleThemeChange
@@ -163,7 +154,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '~@/assets/css/common.scss';
-// @import "~@/assets/css/theme/mixin.scss";
+@import "~@/assets/css/theme/mixin.scss";
 
 .font-color {
   @include header_font_color($h_font-color-white-theme);
@@ -200,29 +191,29 @@ export default defineComponent({
   height: $headerHeight;
   align-items: center;
 }
-// .user-name {
-//   margin-left: 10px;
-//   line-height: 14px;
-// }
+.user-name {
+  margin-left: 10px;
+  line-height: 14px;
+}
 // .header-item {
 //   margin-left: 20px;
 // }
-// .user-avator {
-//   margin-left: 20px;
-// }
-// .user-avator img {
-//   display: block;
-//   width: 40px;
-//   height: 40px;
-//   border-radius: 50%;
-// }
-// .el-dropdown-link {
-//   cursor: pointer;
-// }
+.user-avator {
+  margin-left: 20px;
+}
+.user-avator img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.el-dropdown-link {
+  cursor: pointer;
+}
 .theme-btn {
   font-size: 14px;
   cursor: pointer;
-  margin-right: 60px;
+  margin-right: 40px;
 }
 .loginout {
   font-size: 14px;

@@ -86,8 +86,18 @@ export default createStore({
   actions: {
     // 登录
     async loginAction({ commit }, loginParams) {
-      // 登录
-      const loginInfo = await login(loginParams)
+      // 登录 Action
+      // const loginInfo = await login(loginParams)
+      // 测试数据
+      const loginInfo = {
+        token: 'TOKEN-DATA-20211207-TOKEN-DATA',
+        username: 'Tom',
+        // 权限控制
+        permission: {
+          codePaths: [],
+          digest: 'ALL'
+        }
+      }
       // 要先写入 token，才能获取用户信息
       commit('setUserInfo', loginInfo)
 
@@ -99,8 +109,11 @@ export default createStore({
     async updateUserRoleAction({ commit, state }) {
       const userInfo = state.userInfo
 
-      const userRole = await getCodePath()
-      userInfo.role = userRole
+      // const userRole = await getCodePath()
+      userInfo.permission = {
+        codePaths: [],
+        digest: 'ALL'
+      } // userRole
 
       $emitter.emit('update:role')
       commit('setUserInfo', userInfo)

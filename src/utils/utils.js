@@ -16,29 +16,28 @@ export function getTypeof(val) {
  * @param {String} format[可选] （默认值：dd/MM/yyyy hh:mm:ss）支持 yyyy-MM-dd hh:mm:ss等常用日期格式
  * @returns
  */
- export function formatDate(dt, fmt="dd/MM/yyyy hh:mm:ss") { // author: meizz
-  if(!dt) {
+export function formatDate(dt, fmt = 'dd/MM/yyyy hh:mm:ss') { // author: meizz
+  if (!dt) {
     return ''
   }
-  if(getTypeof(dt) === 'String') {
+  if (getTypeof(dt) === 'String') {
     dt = new Date(dt)
   }
 
   const o = {
-    "M+": dt.getMonth() + 1,                 // 月份
-    "d+": dt.getDate(),                    // 日
-    "h+": dt.getHours(),                   // 小时
-    "m+": dt.getMinutes(),                 // 分
-    "s+": dt.getSeconds(),                 // 秒
-    "q+": Math.floor((dt.getMonth() + 3) / 3), // 季度
-    "S": dt.getMilliseconds()             // 毫秒
-  };
-  if (/(y+)/.test(fmt))
-      fmt = fmt.replace(RegExp.$1, (dt.getFullYear() + "").substr(4 - RegExp.$1.length));
-  for (const k in o)
-      if (new RegExp("(" + k + ")").test(fmt))
-          fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-  return fmt;
+    'M+': dt.getMonth() + 1, // 月份
+    'd+': dt.getDate(), // 日
+    'h+': dt.getHours(), // 小时
+    'm+': dt.getMinutes(), // 分
+    's+': dt.getSeconds(), // 秒
+    'q+': Math.floor((dt.getMonth() + 3) / 3), // 季度
+    S: dt.getMilliseconds() // 毫秒
+  }
+  if (/(y+)/.test(fmt)) { fmt = fmt.replace(RegExp.$1, (dt.getFullYear() + '').substr(4 - RegExp.$1.length)) }
+  for (const k in o) {
+    if (new RegExp('(' + k + ')').test(fmt)) { fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length))) }
+  }
+  return fmt
 }
 /**
  * 计算日期时间 date2 - date1
@@ -121,23 +120,23 @@ export function guid() {
  * @param {String} currencyUnit 货币单位
  * @returns
  */
- export const formatPrice = (price, reservedDigits = 0) => {
+export const formatPrice = (price, reservedDigits = 0) => {
   if (!price) {
     return price === 0 ? price : '-'
   }
 
   const psplit = price.toString().split('.')
   let _p = psplit[0].replace(/(\d{1,3})(?=(\d{3})+$)/g, '$&,')
-  if(psplit.length > 1) {
+  if (psplit.length > 1) {
     const floatStr = psplit[1]
-    if(floatStr.length > 0) {
+    if (floatStr.length > 0) {
       _p += `.${floatStr}`
     }
     const _l = reservedDigits - floatStr.length
-    if(_l > 0) {
+    if (_l > 0) {
       _p = `${_p}${'0'.repeat(_l)}`
     }
-  } else if(reservedDigits > 0){
+  } else if (reservedDigits > 0) {
     _p = `${_p}.${'0'.repeat(reservedDigits)}`
   }
 
@@ -167,10 +166,10 @@ export const discountPrice = (salePrice, delPrice) => {
  * @param {*} delay 执行间隔时间 ms
  * @returns
  */
-export const throttle = function (fn, delay = 15) {
+export const throttle = function(fn, delay = 15) {
   let timer = null
 
-  return function () {
+  return function() {
     if (!timer) {
       const context = this
       const args = arguments
@@ -190,10 +189,10 @@ export const throttle = function (fn, delay = 15) {
  * @param {*} delay 等待执行间隔时间 ms
  * @returns
 */
-export const debounce = function (fn, delay = 15) {
+export const debounce = function(fn, delay = 15) {
   let timer = null
 
-  return function () {
+  return function() {
     if (timer) {
       clearTimeout(timer)
       timer = null

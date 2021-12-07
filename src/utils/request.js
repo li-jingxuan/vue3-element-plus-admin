@@ -17,6 +17,7 @@ const service = axios.create({
   timeout: 15000
 })
 
+// TODO 这里没有解决 请求覆盖 的问题，后面需要进行处理
 service.interceptors.request.use(
   (config) => {
     const userInfo = store.state.userInfo
@@ -36,9 +37,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   async(response) => {
     const lastPermission = store.state.PLPermission
-    // TODO digest暂不存在
     const curPermission = response.headers['pl-permission-digest']
-    // 权限更新
+    // 可以通过头信息 来确认是否需要更新权限
     if (curPermission) {
       if (!lastPermission) {
         store.commit('setPLPermission', curPermission)

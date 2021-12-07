@@ -1,5 +1,6 @@
 const langFiles = require.context('./', true, /\.js$/)
 
+// 采用 “策略模式" 动态注册国际化文件
 const i18nObject = {}
 const settingLang = {
   _set: {

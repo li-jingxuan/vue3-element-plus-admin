@@ -55,7 +55,7 @@
         </el-button>
       </div>
     </div>
-    <div class="tips">Copyright 2021 South X, All rights reserved.</div>
+    <div class="tips">Copyright 2021 XXXX, All rights reserved.</div>
   </div>
 </template>
 
